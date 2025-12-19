@@ -17,18 +17,16 @@ for l in timings:
     time_to_next_train=metro_time-current_time
 
     if time_to_next_train>=dt.timedelta(days=0):
-        print("Your next train is arriving in",time_to_next_train)
-
         if time_to_next_train>=walk:
 
             hours,mins,sec = str(time_to_next_train).split('.')[0].split(':')
-            print(f"or wait for the next one arriving at {mins}mins {sec}seconds")
+            print(f"The Next Train will arrive at {mins} mins {sec} seconds")
             break
 
         else:
 
             hours,mins,sec = str(time_to_next_train).split('.')[0].split(':')
-            print(f"you have only {mins}mins {sec}seconds to reach the current train")
+            print(f"You have only {mins} mins {sec} seconds to reach the current train")
 
 
 
