@@ -7,15 +7,13 @@ class MetroDisplay:
         self.root = root
         self.walk_time = timedelta(minutes=12)
         
-        # Load metro timings    
+         
         self.load_metro_timings()
         
-        # Load and resize background image to 1920x1080
         self.bg_image = Image.open("Electronic_City.jpg")
         self.bg_image = self.bg_image.resize((1920, 1080), Image.LANCZOS)
         self.width, self.height = 1920, 1080
         
-        #customfont
         self.font_xlarge = ImageFont.truetype("OpenSauceOne-Bold.ttf", 95)      # next train
         self.font_large = ImageFont.truetype("OpenSauceOne-Bold.ttf", 55)        # countdown
         self.font_medium = ImageFont.truetype("OpenSauceOne-Bold.ttf", 60)       # current time
@@ -64,7 +62,6 @@ class MetroDisplay:
         return next_train, can_reach
     
     def get_upcoming_trains(self, count=4):
-        """Get list of next N trains"""
         current_time = datetime.now()
         y = current_time.year
         m = current_time.month
@@ -82,8 +79,7 @@ class MetroDisplay:
         
         return upcoming
     
-    def draw_rounded_rectangle(self, draw, xy, radius, fill):
-        """Draw a rounded rectangle"""
+    def draw_rounded_rectangle(self, draw, xy, radius, fill):  
         x1, y1, x2, y2 = xy
         draw.rectangle([x1 + radius, y1, x2 - radius, y2], fill=fill)
         draw.rectangle([x1, y1 + radius, x2, y2 - radius], fill=fill)
@@ -127,13 +123,13 @@ class MetroDisplay:
             if can_reach:
                 # Green box with full countdown
                 box_color = "#00D98E"
-                countdown_text = f"{mins:02d} mins {secs:02d} seconds left"
+                countdown_text = f"{mins:02d} mins {secs:02d} seconds left :) "
                 self.draw_rounded_rectangle(draw, (490, 480, 1430, 726), 30, box_color)
                 self.draw_text_centered(draw, countdown_text, 960, 588, self.font_large, "white")
             else:
                 # Red box with only "hurry up"
                 box_color = "#FF3B3B"
-                countdown_text = f"{mins:02d} mins {secs:02d} seconds left"
+                countdown_text = f"{mins:02d} mins {secs:02d} seconds left :( \n   Wait for the next train! "
                 self.draw_rounded_rectangle(draw, (490, 480, 1430, 726), 30, box_color)
                 self.draw_text_centered(draw, countdown_text, 960, 588, self.font_large, "white")
         else:
